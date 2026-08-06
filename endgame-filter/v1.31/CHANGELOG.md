@@ -7,6 +7,7 @@
 ## 新引入的想法
 
 - 特殊 Boss 门票与终局钥匙不再按市场价格分级，统一固定为 B3 蓝色。
+- 所有特殊 Boss 门票与终局钥匙统一使用柔化蓝色边框。
 - `Pinnacle Keys` 使用类别规则，后续新增的同类别钥匙会自动获得 B3 样式。
 - 归入 `Map Fragments` 的 Boss 门票使用明确的 BaseType 名单；普通进度碎片不受影响。
 
@@ -16,5 +17,6 @@
 | --- | --- | --- |
 | `Class == "Pinnacle Keys"` | W1 安全回退或市场评级 | **B3** |
 | 已知 `Map Fragments` Boss 门票 BaseType | H / G2 / B3 / P4 | **B3** |
+| 特殊 Boss 门票与终局钥匙边框 | 柔化白色 | **柔化蓝色** |
 | `An Audience with the King`（谒王之约）低价值隐藏 | H | 删除 |
 | `Call of the Shadows`（暗影呼唤）低价值隐藏 | H | 删除 |
