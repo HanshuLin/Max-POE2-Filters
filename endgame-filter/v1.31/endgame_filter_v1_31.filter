@@ -140,7 +140,7 @@ Show
     SetFontSize 36
     SetTextColor 51 153 238 255
     SetBackgroundColor 0 0 0 220
-    SetBorderColor 220 220 220 255
+    SetBorderColor 51 153 238 180
     PlayEffect Blue
     CustomAlertSound "blue.mp3"
     DisableDropSoundIfAlertSound
@@ -151,7 +151,7 @@ Show
     SetFontSize 36
     SetTextColor 51 153 238 255
     SetBackgroundColor 0 0 0 220
-    SetBorderColor 220 220 220 255
+    SetBorderColor 51 153 238 180
     PlayEffect Blue
     CustomAlertSound "blue.mp3"
     DisableDropSoundIfAlertSound
