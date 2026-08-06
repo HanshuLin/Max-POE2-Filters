@@ -133,7 +133,32 @@ Show
     MinimapIcon 1 Blue Square
 
 #===================================================================================================
-# 06. Market-priced non-equipment economy items
+# 06. Special boss tickets and pinnacle keys — fixed B3
+#===================================================================================================
+Show
+    Class == "Pinnacle Keys"
+    SetFontSize 36
+    SetTextColor 51 153 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 220 220 220 255
+    PlayEffect Blue
+    CustomAlertSound "blue.mp3"
+    DisableDropSoundIfAlertSound
+    MinimapIcon 1 Blue Square
+
+Show
+    BaseType == "An Audience with the King" "Ancient Crisis Fragment" "Breachlord Sac" "Breachstone" "Cowardly Fate" "Deadly Fate" "Faded Crisis Fragment" "Head of the King" "Idol of Estazunti" "Kulemak's Invitation" "Origin Core" "Origin Cradle" "Origin Spark" "Raven's Reflection" "Simulacrum" "The Triskelion Reforged" "Victorious Fate" "Weathered Crisis Fragment"
+    SetFontSize 36
+    SetTextColor 51 153 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 220 220 220 255
+    PlayEffect Blue
+    CustomAlertSound "blue.mp3"
+    DisableDropSoundIfAlertSound
+    MinimapIcon 1 Blue Square
+
+#===================================================================================================
+# 07. Market-priced non-equipment economy items
 #===================================================================================================
 Show
     BaseType == "Carved Majesty"
@@ -301,7 +326,7 @@ Show
     MinimapIcon 2 Green Triangle
 
 #===================================================================================================
-# 07. Valuable unique/shared bases — conservative highest-value policy
+# 08. Valuable unique/shared bases — conservative highest-value policy
 #===================================================================================================
 Show
     Rarity Unique
@@ -352,7 +377,7 @@ Show
     MinimapIcon 1 Blue Hexagon
 
 #===================================================================================================
-# 08. High-value jewellery bases
+# 09. High-value jewellery bases
 #===================================================================================================
 Show
     Rarity Normal Magic Rare
@@ -445,7 +470,7 @@ Show
     MinimapIcon 0 Red Star
 
 #===================================================================================================
-# 09. Exceptional equipment — executable proxy for the 卓越 prefix
+# 10. Exceptional equipment — executable proxy for the 卓越 prefix
 #===================================================================================================
 Show
     Quality >= 21
@@ -484,7 +509,7 @@ Show
     MinimapIcon 1 Blue Hexagon
 
 #===================================================================================================
-# 10. Gems — named lineage first, then exact level 20, ordinary supports hidden
+# 11. Gems — named lineage first, then exact level 20, ordinary supports hidden
 #===================================================================================================
 Show
     Class == "Skill Gems" "Support Gems"
@@ -514,7 +539,7 @@ Show
     DisableDropSound
 
 #===================================================================================================
-# 11. T15 waystones only
+# 12. T15 waystones only
 #===================================================================================================
 Show
     WaystoneTier 15
@@ -530,7 +555,7 @@ Hide
     DisableDropSound
 
 #===================================================================================================
-# 12. Base progression splinters — white minimum, market grades above already won
+# 13. Base progression splinters — white minimum, market grades above already won
 #===================================================================================================
 Show
     BaseType == "Breach Splinter" "Petition Splinter" "Runic Splinter" "Simulacrum Splinter"
@@ -541,19 +566,8 @@ Show
     DisableDropSound
 
 #===================================================================================================
-# 13. Known low-value and unpriced economy handling
+# 14. Known low-value and unpriced economy handling
 #===================================================================================================
-Show
-    BaseType == "An Audience with the King" "Call of the Shadows"
-    SetFontSize 36
-    SetTextColor 51 153 238 255
-    SetBackgroundColor 0 0 0 220
-    SetBorderColor 220 220 220 255
-    PlayEffect Blue
-    CustomAlertSound "blue.mp3"
-    DisableDropSoundIfAlertSound
-    MinimapIcon 1 Blue Square
-
 Hide
     BaseType == "Orb of Transmutation" "Orb of Augmentation" "Scroll of Wisdom" "Transmutation Shard" "Regal Shard" "Artificer's Shard" "Chance Shard" "Alchemy Shard"
     DisableDropSound
@@ -647,7 +661,7 @@ Hide
     DisableDropSound
 
 #===================================================================================================
-# 14. Known low unique bases, then P0 unknown unique fallback
+# 15. Known low unique bases, then P0 unknown unique fallback
 #===================================================================================================
 Hide
     Rarity Unique
@@ -713,7 +727,7 @@ Show
     DisableDropSound
 
 #===================================================================================================
-# 15. Unknown new non-equipment economy safety net
+# 16. Unknown new non-equipment economy safety net
 #===================================================================================================
 Show
     Class == "Map Fragments" "Tablet"
@@ -748,7 +762,7 @@ Show
     DisableDropSound
 
 #===================================================================================================
-# 16. Final equipment hide and terminal hide
+# 17. Final equipment hide and terminal hide
 #===================================================================================================
 Hide
     Class == "Amulets" "Belts" "Body Armours" "Boots" "Bows" "Bucklers" "Crossbows" "Foci" "Gloves" "Helmets" "One Hand Maces" "Quarterstaves" "Quivers" "Rings" "Sceptres" "Shields" "Spears" "Staves" "Talismans" "Two Hand Maces" "Wands" "Life Flasks" "Mana Flasks" "Charms"
