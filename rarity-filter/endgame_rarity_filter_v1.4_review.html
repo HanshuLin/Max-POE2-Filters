@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>POE2 Endgame Rarity Filter V1.4 Review</title>
+  <style>
+    :root{color-scheme:dark;font-family:Inter,"Microsoft YaHei",system-ui,sans-serif;background:#090b10;color:#e8edf6}
+    *{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 12% -8%,#28203f 0,transparent 34%),#090b10}
+    main{max-width:1380px;margin:auto;padding:32px}.hero{display:flex;justify-content:space-between;gap:28px;align-items:end}.hero h1{margin:0 0 8px;font-size:clamp(28px,4vw,48px)}
+    .muted{color:#9ba7b8}.meta{text-align:right;line-height:1.6}.panel{background:#10141ddd;border:1px solid #28303e;border-radius:12px;padding:20px;margin:22px 0}
+    .grades{display:grid;grid-template-columns:repeat(7,1fr);gap:10px;margin:24px 0}.grade{border:2px solid var(--c);background:#000d;border-radius:9px;padding:14px;min-height:104px;box-shadow:0 0 18px color-mix(in srgb,var(--c) 18%,transparent)}
+    .grade b{display:block;color:var(--c);font-size:21px;margin-bottom:7px}.grade small{color:#aab5c4;line-height:1.4}.logic{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.logic article{background:#0b0f16;border-left:3px solid #876fe1;padding:14px;line-height:1.55}.logic b{color:#e5dcff}
+    .equation{margin:16px 0 0;padding:14px;border:1px solid #5f548c;background:#17132a;border-radius:8px;color:#e2d9ff;font-weight:700;text-align:center}
+    .toolbar{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0}.toolbar input,.toolbar select{background:#090c12;color:#fff;border:1px solid #3a4353;border-radius:7px;padding:10px 12px}.toolbar input{min-width:280px;flex:1}
+    .tablewrap{overflow:auto;border:1px solid #293140;border-radius:9px}table{border-collapse:collapse;width:100%;font-size:13px}th,td{padding:11px 12px;border-bottom:1px solid #222936;text-align:left;vertical-align:top}th{position:sticky;top:0;background:#171d27;z-index:2;white-space:nowrap}tr:hover{background:#171c27}
+    code{color:#d7c7ff}.loot{display:inline-flex;min-width:70px;justify-content:center;padding:6px 9px;color:var(--c);background:#000;border:2px solid var(--c);font-weight:800;box-shadow:0 2px 7px #0009}.loot.h{color:#777;border:1px dashed #555;text-decoration:line-through;box-shadow:none}.bases{max-width:600px;line-height:1.6}.tag{display:inline-block;border:1px solid #475166;border-radius:999px;padding:2px 7px;margin:2px 3px 2px 0;color:#bcc6d5;background:#151a24}.count{color:#9ba7b8;font-variant-numeric:tabular-nums}
+    .tests{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.test{background:#0b0f16;border:1px solid #2d3544;border-radius:8px;padding:14px;line-height:1.55}.test .result{float:right;font-weight:800}.note{color:#ffcc72}
+    @media(max-width:1000px){main{padding:18px}.grades{grid-template-columns:repeat(2,1fr)}.logic,.tests{grid-template-columns:1fr}.hero{display:block}.meta{text-align:left;margin-top:14px}th,td{white-space:normal}}
+  </style>
+</head>
+<body><main>
+  <section class="hero"><div><h1>Endgame Rarity Filter V1.4</h1><div class="muted">首饰底材分级 Review · Filter 规则与视觉结果一致</div></div><div class="meta"><b>目标环境</b><br>POE2 0.5 · 软核交易服<br><span class="muted">赛季末高阶异界速刷</span></div></section>
+
+  <section class="grades">
+    <article class="grade" style="--c:#ff2020"><b>R5 红</b><small>永久红色光柱<br>red.mp3 · 大 Hexagon</small></article>
+    <article class="grade" style="--c:#a335ee"><b>P4 紫</b><small>永久紫色光柱<br>提示音 · 大 Hexagon</small></article>
+    <article class="grade" style="--c:#3399ee"><b>B3 蓝</b><small>临时蓝色光柱<br>无提示音</small></article>
+    <article class="grade" style="--c:#58d34f"><b>G2 绿</b><small>无光柱<br>小 Hexagon</small></article>
+    <article class="grade" style="--c:#fff"><b>W1 白</b><small>安全保留<br>小 Hexagon</small></article>
+    <article class="grade" style="--c:#9d9d9d"><b>X0 灰</b><small>未知底材兜底<br>无图标</small></article>
+    <article class="grade" style="--c:#555"><b>H 隐藏</b><small>已知低价值底材<br>关闭掉落音</small></article>
+  </section>
+
+  <section class="panel"><h2>V1.4 评级模型</h2><div class="logic">
+    <article><b>底材决定基础评级</b><br>普通稀有首饰按 NeverSink T1–T4 档位，再结合 ItemLevel 82 分界。</article>
+    <article><b>UIT 只提供升级保护</b><br>UIT 5/4/3/2 分别保证最低 P4/B3/G2/W1，不会覆盖更高的底材评级。</article>
+    <article><b>特殊与未知底材独立处理</b><br>特殊机制底材优先保护；未收录的新稀有底材以 X0 灰色显示。</article>
+  </div><div class="equation">最终评级 = max（特殊底材评级，普通底材 + ItemLevel 评级，UIT 最低保护）</div></section>
+
+  <section class="panel"><h2>首饰规则 <span class="count" id="count"></span></h2><div class="toolbar">
+    <input id="search" type="search" placeholder="搜索规则、BaseType 或条件…">
+    <select id="grade"><option value="">全部品级</option><option>R5</option><option>P4</option><option>B3</option><option>G2</option><option>W1</option><option>H</option><option>X0</option></select>
+    <select id="kind"><option value="">全部类型</option><option value="特殊底材">特殊底材</option><option value="UIT 保护">UIT 保护</option><option value="普通底材">普通底材</option><option value="安全兜底">安全兜底</option></select>
+  </div><div class="tablewrap"><table><thead><tr><th>结果</th><th>类型</th><th>条件</th><th>BaseType / 范围</th><th>视觉</th></tr></thead><tbody id="rules"></tbody></table></div></section>
+
+  <section class="panel"><h2>优先级验证样例</h2><div class="tests">
+    <article class="test"><span class="result" style="color:#3399ee">B3</span><b>Amethyst Ring</b><br>ilvl 82 · UIT 2<br><span class="muted">底材 B3 高于 UIT 的 W1 保护。</span></article>
+    <article class="test"><span class="result" style="color:#a335ee">P4</span><b>Wide Belt</b><br>ilvl 82 · UIT 5<br><span class="muted">UIT 5 在 T4 隐藏规则之前升级。</span></article>
+    <article class="test"><span class="result" style="color:#9d9d9d">X0</span><b>未来新增首饰底材</b><br>UIT 0–1<br><span class="muted">未知稀有底材不会被总兜底误隐藏。</span></article>
+    <article class="test"><span class="result" style="color:#58d34f">G2</span><b>Gold Ring</b><br>ilvl 82 · UIT 1<br><span class="muted">T2 高物等基础评级生效。</span></article>
+    <article class="test"><span class="result" style="color:#fff">W1</span><b>Iron Ring</b><br>ilvl 82 · UIT 1<br><span class="muted">T3 仅在高物等时保留。</span></article>
+    <article class="test"><span class="result" style="color:#777">H</span><b>Wide Belt</b><br>任意物等 · UIT 0–1<br><span class="muted">已知 T4 底材隐藏。</span></article>
+  </div><p class="note">注：特殊底材规则覆盖 Normal / Magic / Rare；T1–T4 普通底材分级仅处理 Rare。</p></section>
+</main>
+<script>
+const rows=[
+['R5','特殊底材','Normal / Magic / Rare','Abyssal Signet|Pearlescent Amulet|Veridical Chain','永久红光柱 · red.mp3 · 大 Hexagon'],
+['P4','特殊底材','Normal / Magic / Rare','Absent Amulet|Dusk Amulet|Dusk Ring|Gloam Amulet|Gloam Ring|Penumbra Amulet|Penumbra Ring|Tenebrous Amulet|Tenebrous Ring|Refined Breach Ring','永久紫光柱 · 提示音 · 大 Hexagon'],
+['P4','UIT 保护','Rare · UIT >= 5','Amulets|Belts|Rings','永久紫光柱 · 提示音 · 大 Hexagon'],
+['B3','特殊底材','Normal / Magic / Rare','Biostatic Ring|Vitalic Ring|Mnemonic Ring|Kinetic Ring|Oneiric Ring|Grasping Ring|Corona Amulet|Distorted Amulet|Lament Amulet|Portent Amulet|Twisted Amulet|Forking Belt|Invoking Belt|Sinew Belt|Stalking Belt','临时蓝光柱 · 中 Hexagon'],
+['B3','特殊底材','Normal / Magic / Rare · ilvl >= 82','Breach Ring','临时蓝光柱 · 中 Hexagon'],
+['B3','普通底材','Rare · T1 · ilvl >= 82','Amethyst Ring|Breach Ring|Prismatic Ring|Solar Amulet','临时蓝光柱 · 中 Hexagon'],
+['B3','UIT 保护','Rare · UIT = 4','Amulets|Belts|Rings','临时蓝光柱 · 中 Hexagon'],
+['G2','普通底材','Rare · T1 · ilvl 65–81','Amethyst Ring|Breach Ring|Prismatic Ring|Solar Amulet','无光柱 · 小 Hexagon'],
+['G2','普通底材','Rare · T2 · ilvl >= 82','Gold Ring|Pearl Ring|Ruby Ring|Sapphire Ring|Topaz Ring|Unset Ring|Amber Amulet|Azure Amulet|Bloodstone Amulet|Gold Amulet|Jade Amulet|Lapis Amulet|Lunar Amulet|Stellar Amulet|Plate Belt|Utility Belt','无光柱 · 小 Hexagon'],
+['G2','UIT 保护','Rare · UIT = 3','Amulets|Belts|Rings','无光柱 · 小 Hexagon'],
+['W1','普通底材','Rare · T2 · ilvl 65–81','Gold Ring|Pearl Ring|Ruby Ring|Sapphire Ring|Topaz Ring|Unset Ring|Amber Amulet|Azure Amulet|Bloodstone Amulet|Gold Amulet|Jade Amulet|Lapis Amulet|Lunar Amulet|Stellar Amulet|Plate Belt|Utility Belt','无光柱 · 小 Hexagon'],
+['W1','普通底材','Rare · T3 · ilvl >= 82','Emerald Ring|Iron Ring|Lazuli Ring|Crimson Amulet|Double Belt|Fine Belt|Heavy Belt|Long Belt|Rawhide Belt','无光柱 · 小 Hexagon'],
+['W1','UIT 保护','Rare · UIT = 2','Amulets|Belts|Rings','无光柱 · 小 Hexagon'],
+['H','普通底材','Rare · T3 · ilvl 65–81','Emerald Ring|Iron Ring|Lazuli Ring|Crimson Amulet|Double Belt|Fine Belt|Heavy Belt|Long Belt|Rawhide Belt','隐藏 · 关闭掉落音'],
+['H','普通底材','Rare · T4 · 任意物等','Linen Belt|Mail Belt|Ornate Belt|Wide Belt','隐藏 · 关闭掉落音'],
+['X0','安全兜底','Rare · 未命中上述规则','Amulets|Belts|Rings','灰字 · 无图标']
+];
+const colors={R5:'#ff2020',P4:'#a335ee',B3:'#3399ee',G2:'#58d34f',W1:'#fff',X0:'#9d9d9d',H:'#777'},tbody=document.querySelector('#rules'),search=document.querySelector('#search'),grade=document.querySelector('#grade'),kind=document.querySelector('#kind'),count=document.querySelector('#count');
+function render(){const q=search.value.trim().toLowerCase(),g=grade.value,k=kind.value;const visible=rows.filter(r=>(!q||r.join(' ').toLowerCase().includes(q))&&(!g||r[0]===g)&&(!k||r[1]===k));tbody.innerHTML=visible.map(r=>`<tr><td><span class="loot ${r[0]==='H'?'h':''}" style="--c:${colors[r[0]]}">${r[0]}</span></td><td>${r[1]}</td><td><code>${r[2]}</code></td><td class="bases">${r[3].split('|').map(x=>`<span class="tag">${x}</span>`).join('')}</td><td>${r[4]}</td></tr>`).join('');count.textContent=`(${visible.length} / ${rows.length})`}
+[search,grade,kind].forEach(el=>el.addEventListener(el===search?'input':'change',render));render();
+</script></body></html>

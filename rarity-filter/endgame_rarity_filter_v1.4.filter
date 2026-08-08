@@ -1,0 +1,1692 @@
+# ============================================================================
+# POE2《流放之路：降临》异界速刷过滤器
+# 目标版本：0.5 奥杜尔秘符｜软核交易服｜赛季末｜高阶异界速刷
+# 版本：endgame-rarity-filter-v1.4｜发布日期：2026-08-08
+# v1.4 更新：首次纳入 Max POE2 Filters；保留基于稀有度、底材档位、物等和 UIT 的评级逻辑。
+# 市场价值快照：国服 2026-08-03 14:00；仅中/高置信度、无数据源错误项目。
+# 价值保护阈值：>10D R5；>3–10D P4；1–3D B3；只升不降。
+#
+# 视觉品级：R5 红 / P4 紫 / B3 蓝 / G2 绿 / W1 白 / X0 灰 / H 隐藏
+# 字体统一 32；默认黑色背景；边框表示功能大类别。
+# 边框：装备无边框；镶嵌物紫色；门票与消耗品统一柔化白；制作品原生通货金。
+# 蓝色临时光柱；紫/红永久光柱与提示音。
+#
+# 图标语义：
+#   装备 Hexagon；传奇装备 Star（替代 Hexagon）
+#   镶嵌物 Diamond；门票 Square；使用消耗品 Raindrop
+#   制作品（包括宝石）仅 P4/R5 使用 Star
+#
+# 匹配值使用游戏内部英文 BaseType/Class；国服客户端仍显示简体中文物品名。
+# 规则关键字依据腾讯官方过滤器语法；物品名单覆盖 0.5 新增物品。
+# ============================================================================
+
+# ============================================================================
+# 00｜市场价值保护层
+# ============================================================================
+
+# R5｜R5 市场价值保护｜crafting｜2026-08-03 14:00 国服价格快照；>10D；仅中/高置信度，只升不降。
+Show
+    BaseType == "Uul-Netol's Embrace" "Atziri's Communion" "Her Declaration" "Garukhan's Resolve" "Dialla's Desire" "Seraph's Heart" "Uhtred's Exodus" "Rigwald's Ferocity" "Tul's Stillness" "Esh's Radiance" "Perfect Flux" "Aldur's Saga" "Uhtred's Augury" "Rakiata's Flow" "Breachlord's Rift" "Omen of Chance" "Omen of Sinistral Annulment" "Omen of Sinistral Erasure" "Preserved Cranium"
+    SetTextColor 255 32 32 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 170 158 130 255
+    SetFontSize 32
+    PlayEffect Red
+    CustomAlertSound "red.mp3"
+    DisableDropSoundIfAlertSound
+    MinimapIcon 0 Red Star
+
+# R5｜R5 市场价值保护｜socketables｜2026-08-03 14:00 国服价格快照；>10D；仅中/高置信度，只升不降。
+Show
+    BaseType == "Jiquani's Thesis" "Carved Majesty" "Raven-Touched Shard" "Aldur's Legacy"
+    SetTextColor 255 32 32 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 190 145 225 255
+    SetFontSize 32
+    PlayEffect Red
+    CustomAlertSound "red.mp3"
+    DisableDropSoundIfAlertSound
+    MinimapIcon 0 Red Diamond
+
+# P4｜P4 市场价值保护｜crafting｜2026-08-03 14:00 国服价格快照；>3–10D；仅中/高置信度，只升不降。
+Show
+    BaseType == "Omen of Dextral Annulment" "Omen of Dextral Erasure" "Refined Sibilant Catalyst" "Refined Reaver Catalyst" "Vaal Catalysing Infuser" "Crystallised Corruption" "Architect's Orb" "Ancient Collarbone"
+    SetTextColor 163 53 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 170 158 130 255
+    SetFontSize 32
+    PlayEffect Purple
+    PlayAlertSoundPositional 2 150
+    DisableDropSoundIfAlertSound
+    MinimapIcon 0 Purple Star
+
+# P4｜P4 市场价值保护｜socketables｜2026-08-03 14:00 国服价格快照；>3–10D；仅中/高置信度，只升不降。
+Show
+    BaseType == "Perfect Resolve Rune" "Perfect Robust Rune" "Perfect Ward Rune" "Quipolatl's Thesis" "Carved Cunning"
+    SetTextColor 163 53 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 190 145 225 255
+    SetFontSize 32
+    PlayEffect Purple
+    PlayAlertSoundPositional 2 150
+    DisableDropSoundIfAlertSound
+    MinimapIcon 0 Purple Diamond
+
+# P4｜P4 市场价值保护｜tickets｜2026-08-03 14:00 国服价格快照；>3–10D；仅中/高置信度，只升不降。
+Show
+    BaseType == "Origin Core"
+    SetTextColor 163 53 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 220 220 220 255
+    SetFontSize 32
+    PlayEffect Purple
+    PlayAlertSoundPositional 2 150
+    DisableDropSoundIfAlertSound
+    MinimapIcon 0 Purple Square
+
+# B3｜B3 市场价值保护｜crafting｜2026-08-03 14:00 国服价格快照；1–3D；仅中/高置信度，只升不降。
+Show
+    BaseType == "Ixchel's Torment" "Amanamu's Tithe" "Ancient Rib" "Vaal Cultivation Orb" "Ancient Jawbone" "Khatal's Rejuvenation" "Core Destabiliser" "Kulemak's Dominion" "Tecrod's Revenge"
+    SetTextColor 51 153 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 170 158 130 255
+    SetFontSize 32
+    PlayEffect Blue Temp
+    DisableDropSound
+
+# B3｜B3 市场价值保护｜socketables｜2026-08-03 14:00 国服价格快照；1–3D；仅中/高置信度，只升不降。
+Show
+    BaseType == "Emergent Instinct" "Soul Core of Quipolatl" "Soul Core of Cholotl" "Ulaman's Gaze" "Emergent Protection"
+    SetTextColor 51 153 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 190 145 225 255
+    SetFontSize 32
+    PlayEffect Blue Temp
+    DisableDropSound
+    MinimapIcon 1 Blue Diamond
+
+# B3｜B3 市场价值保护｜tickets｜2026-08-03 14:00 国服价格快照；1–3D；仅中/高置信度，只升不降。
+Show
+    BaseType == "Origin Spark" "Origin Cradle"
+    SetTextColor 51 153 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 220 220 220 255
+    SetFontSize 32
+    PlayEffect Blue Temp
+    DisableDropSound
+    MinimapIcon 1 Blue Square
+
+# ============================================================================
+# 00｜任务与无法恢复物品
+# ============================================================================
+
+# G2｜任务物品与区域内物品｜安全保护，避免任务流程物品被隐藏。
+Show
+    Class == "Instance Local Items" "Quest Items"
+    SetTextColor 88 211 79 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 220 220 220 255
+    SetFontSize 32
+    DisableDropSound
+
+# W1｜客户端标记为始终显示的物品｜服从客户端不可恢复物品标记。
+Show
+    AlwaysShow True
+    SetTextColor 255 255 255 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 0 0 0 0
+    SetFontSize 32
+    DisableDropSound
+
+# ============================================================================
+# 01｜装备｜传奇特例
+# ============================================================================
+
+# P4｜双重腐化传奇装备｜传奇装备使用 Star，特殊状态升级为紫色。
+Show
+    TwiceCorrupted True
+    Rarity Unique
+    Class == "Amulets" "Belts" "Body Armours" "Boots" "Bows" "Bucklers" "Charms" "Crossbows" "Foci" "Gloves" "Helmets" "Life Flasks" "Mana Flasks" "One Hand Maces" "Quarterstaves" "Quivers" "Rings" "Sceptres" "Shields" "Spears" "Staves" "Talismans" "Two Hand Maces" "Wands"
+    SetTextColor 163 53 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 0 0 0 0
+    SetFontSize 32
+    PlayEffect Purple
+    PlayAlertSoundPositional 2 150
+    DisableDropSoundIfAlertSound
+    MinimapIcon 0 Purple Star
+
+# P4｜瓦尔传奇词缀装备
+Show
+    HasVaalUniqueMod True
+    Rarity Unique
+    Class == "Amulets" "Belts" "Body Armours" "Boots" "Bows" "Bucklers" "Charms" "Crossbows" "Foci" "Gloves" "Helmets" "Life Flasks" "Mana Flasks" "One Hand Maces" "Quarterstaves" "Quivers" "Rings" "Sceptres" "Shields" "Spears" "Staves" "Talismans" "Two Hand Maces" "Wands"
+    SetTextColor 163 53 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 0 0 0 0
+    SetFontSize 32
+    PlayEffect Purple
+    PlayAlertSoundPositional 2 150
+    DisableDropSoundIfAlertSound
+    MinimapIcon 0 Purple Star
+
+# P4｜超品质传奇装备
+Show
+    Quality >= 21
+    Rarity Unique
+    Class == "Amulets" "Belts" "Body Armours" "Boots" "Bows" "Bucklers" "Charms" "Crossbows" "Foci" "Gloves" "Helmets" "Life Flasks" "Mana Flasks" "One Hand Maces" "Quarterstaves" "Quivers" "Rings" "Sceptres" "Shields" "Spears" "Staves" "Talismans" "Two Hand Maces" "Wands"
+    SetTextColor 163 53 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 0 0 0 0
+    SetFontSize 32
+    PlayEffect Purple
+    PlayAlertSoundPositional 2 150
+    DisableDropSoundIfAlertSound
+    MinimapIcon 0 Purple Star
+
+# P4｜超插槽大型传奇装备
+Show
+    Sockets >= 3
+    Rarity Unique
+    Class == "Body Armours" "Bows" "Crossbows" "Quarterstaves" "Staves" "Talismans" "Two Hand Maces"
+    SetTextColor 163 53 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 0 0 0 0
+    SetFontSize 32
+    PlayEffect Purple
+    PlayAlertSoundPositional 2 150
+    DisableDropSoundIfAlertSound
+    MinimapIcon 0 Purple Star
+
+# P4｜超插槽小型传奇装备
+Show
+    Sockets >= 2
+    Rarity Unique
+    Class == "Boots" "Bucklers" "Foci" "Gloves" "Helmets" "One Hand Maces" "Sceptres" "Shields" "Spears" "Wands"
+    SetTextColor 163 53 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 0 0 0 0
+    SetFontSize 32
+    PlayEffect Purple
+    PlayAlertSoundPositional 2 150
+    DisableDropSoundIfAlertSound
+    MinimapIcon 0 Purple Star
+
+# B3｜全部其他传奇装备｜无法按传奇名称可靠区分共享底材，因此统一蓝色 Star 保护。
+Show
+    Rarity Unique
+    Class == "Amulets" "Belts" "Body Armours" "Boots" "Bows" "Bucklers" "Charms" "Crossbows" "Foci" "Gloves" "Helmets" "Life Flasks" "Mana Flasks" "One Hand Maces" "Quarterstaves" "Quivers" "Rings" "Sceptres" "Shields" "Spears" "Staves" "Talismans" "Two Hand Maces" "Wands"
+    SetTextColor 51 153 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 0 0 0 0
+    SetFontSize 32
+    PlayEffect Blue Temp
+    DisableDropSound
+    MinimapIcon 1 Blue Star
+
+# ============================================================================
+# 02｜装备｜未鉴定阶级与底材
+# ============================================================================
+
+# R5｜特殊首饰底材｜最高价值机制底材，覆盖普通、魔法与稀有。
+Show
+    Rarity Normal Magic Rare
+    BaseType == "Abyssal Signet" "Pearlescent Amulet" "Veridical Chain"
+    SetTextColor 255 32 32 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 0 0 0 0
+    SetFontSize 32
+    PlayEffect Red
+    CustomAlertSound "red.mp3"
+    DisableDropSoundIfAlertSound
+    MinimapIcon 0 Red Hexagon
+
+# P4｜卓越装备代理｜超品质（>20%）｜覆盖普通、魔法与稀有装备。
+Show
+    Quality >= 21
+    Rarity Normal Magic Rare
+    Class == "Amulets" "Belts" "Body Armours" "Boots" "Bows" "Bucklers" "Charms" "Crossbows" "Foci" "Gloves" "Helmets" "Life Flasks" "Mana Flasks" "One Hand Maces" "Quarterstaves" "Quivers" "Rings" "Sceptres" "Shields" "Spears" "Staves" "Talismans" "Two Hand Maces" "Wands"
+    SetTextColor 163 53 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 0 0 0 0
+    SetFontSize 32
+    PlayEffect Purple
+    PlayAlertSoundPositional 2 150
+    DisableDropSoundIfAlertSound
+    MinimapIcon 0 Purple Hexagon
+
+# P4｜卓越装备代理｜大型装备额外插槽｜覆盖普通、魔法与稀有装备。
+Show
+    Sockets >= 3
+    Rarity Normal Magic Rare
+    Class == "Body Armours" "Bows" "Crossbows" "Quarterstaves" "Staves" "Talismans" "Two Hand Maces"
+    SetTextColor 163 53 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 0 0 0 0
+    SetFontSize 32
+    PlayEffect Purple
+    PlayAlertSoundPositional 2 150
+    DisableDropSoundIfAlertSound
+    MinimapIcon 0 Purple Hexagon
+
+# P4｜卓越装备代理｜小型装备额外插槽｜覆盖普通、魔法与稀有装备。
+Show
+    Sockets >= 2
+    Rarity Normal Magic Rare
+    Class == "Boots" "Bucklers" "Foci" "Gloves" "Helmets" "One Hand Maces" "Sceptres" "Shields" "Spears" "Wands"
+    SetTextColor 163 53 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 0 0 0 0
+    SetFontSize 32
+    PlayEffect Purple
+    PlayAlertSoundPositional 2 150
+    DisableDropSoundIfAlertSound
+    MinimapIcon 0 Purple Hexagon
+
+# P4｜稀有装备｜未鉴定阶级 5
+Show
+    UnidentifiedItemTier >= 5
+    Rarity Rare
+    Class == "Body Armours" "Boots" "Bows" "Bucklers" "Crossbows" "Foci" "Gloves" "Helmets" "One Hand Maces" "Quarterstaves" "Quivers" "Sceptres" "Shields" "Spears" "Staves" "Talismans" "Two Hand Maces" "Wands"
+    SetTextColor 163 53 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 0 0 0 0
+    SetFontSize 32
+    PlayEffect Purple
+    PlayAlertSoundPositional 2 150
+    DisableDropSoundIfAlertSound
+    MinimapIcon 0 Purple Hexagon
+
+# P4｜特殊首饰底材｜高价值机制底材，覆盖普通、魔法与稀有。
+Show
+    Rarity Normal Magic Rare
+    BaseType == "Absent Amulet" "Dusk Amulet" "Dusk Ring" "Gloam Amulet" "Gloam Ring" "Penumbra Amulet" "Penumbra Ring" "Refined Breach Ring" "Tenebrous Amulet" "Tenebrous Ring"
+    SetTextColor 163 53 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 0 0 0 0
+    SetFontSize 32
+    PlayEffect Purple
+    PlayAlertSoundPositional 2 150
+    DisableDropSoundIfAlertSound
+    MinimapIcon 0 Purple Hexagon
+
+# P4｜稀有首饰｜UIT 5+ 独立保护
+Show
+    UnidentifiedItemTier >= 5
+    Rarity Rare
+    Class == "Amulets" "Belts" "Rings"
+    SetTextColor 163 53 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 0 0 0 0
+    SetFontSize 32
+    PlayEffect Purple
+    PlayAlertSoundPositional 2 150
+    DisableDropSoundIfAlertSound
+    MinimapIcon 0 Purple Hexagon
+
+# B3｜稀有装备｜未鉴定阶级 4
+Show
+    UnidentifiedItemTier 4
+    Rarity Rare
+    Class == "Body Armours" "Boots" "Bows" "Bucklers" "Crossbows" "Foci" "Gloves" "Helmets" "One Hand Maces" "Quarterstaves" "Quivers" "Sceptres" "Shields" "Spears" "Staves" "Talismans" "Two Hand Maces" "Wands"
+    SetTextColor 51 153 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 0 0 0 0
+    SetFontSize 32
+    PlayEffect Blue Temp
+    DisableDropSound
+    MinimapIcon 1 Blue Hexagon
+
+# B3｜特殊首饰底材｜机制底材，覆盖普通、魔法与稀有。
+Show
+    Rarity Normal Magic Rare
+    BaseType == "Biostatic Ring" "Vitalic Ring" "Mnemonic Ring" "Kinetic Ring" "Oneiric Ring" "Grasping Ring" "Corona Amulet" "Distorted Amulet" "Lament Amulet" "Portent Amulet" "Twisted Amulet" "Forking Belt" "Invoking Belt" "Sinew Belt" "Stalking Belt"
+    SetTextColor 51 153 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 0 0 0 0
+    SetFontSize 32
+    PlayEffect Blue Temp
+    DisableDropSound
+    MinimapIcon 1 Blue Hexagon
+
+# B3｜高物等裂隙戒指
+Show
+    ItemLevel >= 82
+    Rarity Normal Magic Rare
+    BaseType == "Breach Ring"
+    SetTextColor 51 153 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 0 0 0 0
+    SetFontSize 32
+    PlayEffect Blue Temp
+    DisableDropSound
+    MinimapIcon 1 Blue Hexagon
+
+# B3｜T1 高物等稀有首饰
+Show
+    ItemLevel >= 82
+    Rarity Rare
+    BaseType == "Amethyst Ring" "Breach Ring" "Prismatic Ring" "Solar Amulet"
+    SetTextColor 51 153 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 0 0 0 0
+    SetFontSize 32
+    PlayEffect Blue Temp
+    DisableDropSound
+    MinimapIcon 1 Blue Hexagon
+
+# B3｜稀有首饰｜UIT 4 独立保护
+Show
+    UnidentifiedItemTier 4
+    Rarity Rare
+    Class == "Amulets" "Belts" "Rings"
+    SetTextColor 51 153 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 0 0 0 0
+    SetFontSize 32
+    PlayEffect Blue Temp
+    DisableDropSound
+    MinimapIcon 1 Blue Hexagon
+
+# G2｜T1 稀有首饰｜物等 65–81
+Show
+    ItemLevel >= 65
+    ItemLevel <= 81
+    Rarity Rare
+    BaseType == "Amethyst Ring" "Breach Ring" "Prismatic Ring" "Solar Amulet"
+    SetTextColor 88 211 79 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 0 0 0 0
+    SetFontSize 32
+    DisableDropSound
+    MinimapIcon 2 Green Hexagon
+
+# G2｜T2 高物等稀有首饰
+Show
+    ItemLevel >= 82
+    Rarity Rare
+    BaseType == "Gold Ring" "Pearl Ring" "Ruby Ring" "Sapphire Ring" "Topaz Ring" "Unset Ring" "Amber Amulet" "Azure Amulet" "Bloodstone Amulet" "Gold Amulet" "Jade Amulet" "Lapis Amulet" "Lunar Amulet" "Stellar Amulet" "Plate Belt" "Utility Belt"
+    SetTextColor 88 211 79 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 0 0 0 0
+    SetFontSize 32
+    DisableDropSound
+    MinimapIcon 2 Green Hexagon
+
+# G2｜稀有首饰｜UIT 3 独立保护
+Show
+    UnidentifiedItemTier 3
+    Rarity Rare
+    Class == "Amulets" "Belts" "Rings"
+    SetTextColor 88 211 79 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 0 0 0 0
+    SetFontSize 32
+    DisableDropSound
+    MinimapIcon 2 Green Hexagon
+
+# G2｜高物等稀有护符
+Show
+    ItemLevel >= 80
+    Rarity Rare
+    Class == "Charms"
+    SetTextColor 88 211 79 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 0 0 0 0
+    SetFontSize 32
+    DisableDropSound
+    MinimapIcon 2 Green Hexagon
+
+# G2｜稀有装备｜未鉴定阶级 3
+Show
+    UnidentifiedItemTier 3
+    Rarity Rare
+    Class == "Body Armours" "Boots" "Bows" "Bucklers" "Crossbows" "Foci" "Gloves" "Helmets" "One Hand Maces" "Quarterstaves" "Quivers" "Sceptres" "Shields" "Spears" "Staves" "Talismans" "Two Hand Maces" "Wands"
+    SetTextColor 88 211 79 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 0 0 0 0
+    SetFontSize 32
+    DisableDropSound
+    MinimapIcon 2 Green Hexagon
+
+# W1｜T2 稀有首饰｜物等 65–81
+Show
+    ItemLevel >= 65
+    ItemLevel <= 81
+    Rarity Rare
+    BaseType == "Gold Ring" "Pearl Ring" "Ruby Ring" "Sapphire Ring" "Topaz Ring" "Unset Ring" "Amber Amulet" "Azure Amulet" "Bloodstone Amulet" "Gold Amulet" "Jade Amulet" "Lapis Amulet" "Lunar Amulet" "Stellar Amulet" "Plate Belt" "Utility Belt"
+    SetTextColor 255 255 255 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 0 0 0 0
+    SetFontSize 32
+    DisableDropSound
+    MinimapIcon 2 White Hexagon
+
+# W1｜T3 高物等稀有首饰
+Show
+    ItemLevel >= 82
+    Rarity Rare
+    BaseType == "Emerald Ring" "Iron Ring" "Lazuli Ring" "Crimson Amulet" "Double Belt" "Fine Belt" "Heavy Belt" "Long Belt" "Rawhide Belt"
+    SetTextColor 255 255 255 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 0 0 0 0
+    SetFontSize 32
+    DisableDropSound
+    MinimapIcon 2 White Hexagon
+
+# W1｜稀有首饰｜UIT 2 独立保护
+Show
+    UnidentifiedItemTier 2
+    Rarity Rare
+    Class == "Amulets" "Belts" "Rings"
+    SetTextColor 255 255 255 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 0 0 0 0
+    SetFontSize 32
+    DisableDropSound
+    MinimapIcon 2 White Hexagon
+
+# W1｜稀有装备｜未鉴定阶级 2
+Show
+    UnidentifiedItemTier 2
+    Rarity Rare
+    Class == "Body Armours" "Boots" "Bows" "Bucklers" "Crossbows" "Foci" "Gloves" "Helmets" "One Hand Maces" "Quarterstaves" "Quivers" "Sceptres" "Shields" "Spears" "Staves" "Talismans" "Two Hand Maces" "Wands"
+    SetTextColor 255 255 255 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 0 0 0 0
+    SetFontSize 32
+    DisableDropSound
+    MinimapIcon 2 White Hexagon
+
+# B3｜高品质顶层底材
+Show
+    Quality >= 20
+    ItemLevel >= 82
+    Rarity Normal Magic
+    BaseType == "Ancestral Tiara" "Daggerfoot Shoes" "Dousing Charm" "Gold Amulet" "Gold Ring" "Obliterator Bow" "Sacred Focus" "Sapphire Charm" "Sekhema Sandals" "Sinister Quarterstaff" "Slipstrike Vest" "Solar Amulet" "Stone Charm" "Tasalian Focus" "Thawing Charm" "Vile Robe" "Warmonger Bow" "Amber Amulet" "Amethyst Ring" "Antidote Charm" "Drakeskin Boots" "Elegant Wraps" "Flowing Raiment" "Gemini Crossbow" "Grounding Charm" "Lapis Amulet" "Lunar Amulet" "Prismatic Ring" "Quickslip Shoes" "Razor Quarterstaff" "Ruby Ring" "Sandsworn Sandals" "Sapphire Ring" "Siege Crossbow" "Sirenscale Gloves" "Sleek Jacket" "Staunching Charm" "Striking Quarterstaff" "Tawhoan Tower Shield" "Topaz Ring" "Unset Ring" "Vaal Wraps"
+    SetTextColor 51 153 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 0 0 0 0
+    SetFontSize 32
+    PlayEffect Blue Temp
+    DisableDropSound
+    MinimapIcon 1 Blue Hexagon
+
+# B3｜高插槽大型制作底材
+Show
+    Sockets >= 3
+    ItemLevel >= 82
+    Rarity Normal Magic
+    Class == "Body Armours" "Bows" "Crossbows" "Quarterstaves" "Staves" "Talismans" "Two Hand Maces"
+    BaseType == "Ancestral Tiara" "Daggerfoot Shoes" "Dousing Charm" "Gold Amulet" "Gold Ring" "Obliterator Bow" "Sacred Focus" "Sapphire Charm" "Sekhema Sandals" "Sinister Quarterstaff" "Slipstrike Vest" "Solar Amulet" "Stone Charm" "Tasalian Focus" "Thawing Charm" "Vile Robe" "Warmonger Bow" "Amber Amulet" "Amethyst Ring" "Antidote Charm" "Drakeskin Boots" "Elegant Wraps" "Flowing Raiment" "Gemini Crossbow" "Grounding Charm" "Lapis Amulet" "Lunar Amulet" "Prismatic Ring" "Quickslip Shoes" "Razor Quarterstaff" "Ruby Ring" "Sandsworn Sandals" "Sapphire Ring" "Siege Crossbow" "Sirenscale Gloves" "Sleek Jacket" "Staunching Charm" "Striking Quarterstaff" "Tawhoan Tower Shield" "Topaz Ring" "Unset Ring" "Vaal Wraps"
+    SetTextColor 51 153 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 0 0 0 0
+    SetFontSize 32
+    PlayEffect Blue Temp
+    DisableDropSound
+    MinimapIcon 1 Blue Hexagon
+
+# B3｜高插槽小型制作底材
+Show
+    Sockets >= 2
+    ItemLevel >= 82
+    Rarity Normal Magic
+    Class == "Boots" "Bucklers" "Foci" "Gloves" "Helmets" "One Hand Maces" "Sceptres" "Shields" "Spears" "Wands"
+    BaseType == "Ancestral Tiara" "Daggerfoot Shoes" "Dousing Charm" "Gold Amulet" "Gold Ring" "Obliterator Bow" "Sacred Focus" "Sapphire Charm" "Sekhema Sandals" "Sinister Quarterstaff" "Slipstrike Vest" "Solar Amulet" "Stone Charm" "Tasalian Focus" "Thawing Charm" "Vile Robe" "Warmonger Bow" "Amber Amulet" "Amethyst Ring" "Antidote Charm" "Drakeskin Boots" "Elegant Wraps" "Flowing Raiment" "Gemini Crossbow" "Grounding Charm" "Lapis Amulet" "Lunar Amulet" "Prismatic Ring" "Quickslip Shoes" "Razor Quarterstaff" "Ruby Ring" "Sandsworn Sandals" "Sapphire Ring" "Siege Crossbow" "Sirenscale Gloves" "Sleek Jacket" "Staunching Charm" "Striking Quarterstaff" "Tawhoan Tower Shield" "Topaz Ring" "Unset Ring" "Vaal Wraps"
+    SetTextColor 51 153 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 0 0 0 0
+    SetFontSize 32
+    PlayEffect Blue Temp
+    DisableDropSound
+    MinimapIcon 1 Blue Hexagon
+
+# G2｜高物等顶层白色底材
+Show
+    ItemLevel >= 82
+    Rarity Normal
+    BaseType == "Ancestral Tiara" "Daggerfoot Shoes" "Dousing Charm" "Gold Amulet" "Gold Ring" "Obliterator Bow" "Sacred Focus" "Sapphire Charm" "Sekhema Sandals" "Sinister Quarterstaff" "Slipstrike Vest" "Solar Amulet" "Stone Charm" "Tasalian Focus" "Thawing Charm" "Vile Robe" "Warmonger Bow" "Amber Amulet" "Amethyst Ring" "Antidote Charm" "Drakeskin Boots" "Elegant Wraps" "Flowing Raiment" "Gemini Crossbow" "Grounding Charm" "Lapis Amulet" "Lunar Amulet" "Prismatic Ring" "Quickslip Shoes" "Razor Quarterstaff" "Ruby Ring" "Sandsworn Sandals" "Sapphire Ring" "Siege Crossbow" "Sirenscale Gloves" "Sleek Jacket" "Staunching Charm" "Striking Quarterstaff" "Tawhoan Tower Shield" "Topaz Ring" "Unset Ring" "Vaal Wraps"
+    SetTextColor 88 211 79 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 0 0 0 0
+    SetFontSize 32
+    DisableDropSound
+    MinimapIcon 2 Green Hexagon
+
+# W1｜普通高品质装备
+Show
+    Quality >= 20
+    Rarity Normal Magic
+    Class == "Amulets" "Belts" "Body Armours" "Boots" "Bows" "Bucklers" "Crossbows" "Foci" "Gloves" "Helmets" "One Hand Maces" "Quarterstaves" "Quivers" "Rings" "Sceptres" "Shields" "Spears" "Staves" "Talismans" "Two Hand Maces" "Wands"
+    SetTextColor 255 255 255 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 0 0 0 0
+    SetFontSize 32
+    DisableDropSound
+    MinimapIcon 2 White Hexagon
+
+# W1｜普通稀有护符｜戒指、项链与腰带已改用独立分级。
+Show
+    Rarity Rare
+    Class == "Charms"
+    SetTextColor 255 255 255 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 0 0 0 0
+    SetFontSize 32
+    DisableDropSound
+    MinimapIcon 2 White Hexagon
+
+# H｜T3 稀有首饰｜物等 65–81
+Hide
+    ItemLevel >= 65
+    ItemLevel <= 81
+    Rarity Rare
+    BaseType == "Emerald Ring" "Iron Ring" "Lazuli Ring" "Crimson Amulet" "Double Belt" "Fine Belt" "Heavy Belt" "Long Belt" "Rawhide Belt"
+    DisableDropSound
+
+# H｜T4 稀有首饰｜不限物等
+Hide
+    Rarity Rare
+    BaseType == "Linen Belt" "Mail Belt" "Ornate Belt" "Wide Belt"
+    DisableDropSound
+
+# X0｜未知稀有首饰底材｜未命中特殊底材、UIT 保护或 T1–T4 规则时安全显示。
+Show
+    Rarity Rare
+    Class == "Amulets" "Belts" "Rings"
+    SetTextColor 157 157 157 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 0 0 0 0
+    SetFontSize 32
+    DisableDropSound
+
+# H｜低阶稀有装备
+Hide
+    UnidentifiedItemTier <= 1
+    Rarity Rare
+    Class == "Body Armours" "Boots" "Bows" "Bucklers" "Crossbows" "Foci" "Gloves" "Helmets" "One Hand Maces" "Quarterstaves" "Quivers" "Sceptres" "Shields" "Spears" "Staves" "Talismans" "Two Hand Maces" "Wands"
+    DisableDropSound
+
+# H｜其他非传奇药剂与护符
+Hide
+    Rarity Normal Magic Rare
+    Class == "Charms" "Life Flasks" "Mana Flasks"
+    DisableDropSound
+
+# H｜其他普通、魔法与稀有装备
+Hide
+    Rarity Normal Magic Rare
+    Class == "Amulets" "Belts" "Body Armours" "Boots" "Bows" "Bucklers" "Crossbows" "Foci" "Gloves" "Helmets" "One Hand Maces" "Quarterstaves" "Quivers" "Rings" "Sceptres" "Shields" "Spears" "Staves" "Talismans" "Two Hand Maces" "Wands"
+    DisableDropSound
+
+# ============================================================================
+# 03｜制作品｜技能、辅助与未切割宝石
+# ============================================================================
+
+# P4｜0.5 限定辅助宝石
+Show
+    Class == "Skill Gems" "Support Gems"
+    BaseType == "Tangmazu's Thurible" "Catha's Brilliance" "Mórrigan's Insight" "Prototype Seventeen" "Arbiter's Reach" "Her Declaration" "Seraph's Heart" "Trickster's Shard" "Esh's Prowess" "Tul's Avalanche" "Breachlord's Amalgam" "Vruun's Aftermath" "Vruun's Inevitability" "Uhtred's Rite" "Uhtred's Constellation" "Medved's Felling" "Vorana's Siege" "Styrn's Mountain" "Styrn's Ferocity" "Eonyr's Thunder" "Helbrym's Hide" "Concussive Runes" "Fist of Kalguur" "Healing Runes" "Olroth's Conviction" "Olroth's Hubris" "Runeforged Blades" "Runic Extraction" "Runic Infusion" "Scouring Flame" "Minion Splash I" "Minion Splash II"
+    SetTextColor 163 53 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 170 158 130 255
+    SetFontSize 32
+    PlayEffect Purple
+    PlayAlertSoundPositional 2 150
+    DisableDropSoundIfAlertSound
+    MinimapIcon 0 Purple Star
+
+# R5｜双重腐化高等级高品质宝石
+Show
+    TwiceCorrupted True
+    GemLevel > 20
+    Quality > 20
+    Class == "Skill Gems" "Support Gems"
+    SetTextColor 255 32 32 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 170 158 130 255
+    SetFontSize 32
+    PlayEffect Red
+    CustomAlertSound "red.mp3"
+    DisableDropSoundIfAlertSound
+    MinimapIcon 0 Red Star
+
+# P4｜20级且20%品质成品宝石
+Show
+    GemLevel >= 20
+    Quality >= 20
+    Class == "Skill Gems" "Support Gems"
+    SetTextColor 163 53 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 170 158 130 255
+    SetFontSize 32
+    PlayEffect Purple
+    PlayAlertSoundPositional 2 150
+    DisableDropSoundIfAlertSound
+    MinimapIcon 0 Purple Star
+
+# B3｜20级或高品质成品宝石
+Show
+    GemLevel >= 20
+    Class == "Skill Gems" "Support Gems"
+    SetTextColor 51 153 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 170 158 130 255
+    SetFontSize 32
+    PlayEffect Blue Temp
+    DisableDropSound
+
+# B3｜高品质成品宝石
+Show
+    Quality >= 15
+    Class == "Skill Gems" "Support Gems"
+    SetTextColor 51 153 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 170 158 130 255
+    SetFontSize 32
+    PlayEffect Blue Temp
+    DisableDropSound
+
+# B3｜0.5 限定技能宝石
+Show
+    Class == "Skill Gems"
+    BaseType == "Animus Exchange" "Animus Splinters" "Bitter Dead" "Conductive Runes" "Detonate Living" "Eternal March" "Explosive Transmutation" "Fragments of the Past" "Frostflame Nova" "Grim Pillars" "Hollow Shell" "Leylines" "Powered by Verisium" "Rain of Blades" "Refutation" "Remnants of Kalguur" "Repulsion" "Runic Reprieve" "Skyfall" "Triskelion Cascade" "Verisium Manifestations" "Voltaic Barrier" "Wardbound Minions"
+    SetTextColor 51 153 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 170 158 130 255
+    SetFontSize 32
+    PlayEffect Blue Temp
+    DisableDropSound
+
+# B3｜20级未切割技能/精魂宝石
+Show
+    GemLevel >= 20
+    BaseType "Uncut Skill Gem" "Uncut Spirit Gem"
+    SetTextColor 51 153 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 170 158 130 255
+    SetFontSize 32
+    PlayEffect Blue Temp
+    DisableDropSound
+
+# G2｜19级未切割技能宝石
+Show
+    GemLevel 19
+    BaseType "Uncut Skill Gem"
+    SetTextColor 88 211 79 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 170 158 130 255
+    SetFontSize 32
+    DisableDropSound
+
+# B3｜19级未切割精魂宝石
+Show
+    GemLevel 19
+    BaseType "Uncut Spirit Gem"
+    SetTextColor 51 153 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 170 158 130 255
+    SetFontSize 32
+    PlayEffect Blue Temp
+    DisableDropSound
+
+# W1｜17–18级未切割技能宝石
+Show
+    GemLevel >= 17
+    GemLevel <= 18
+    BaseType "Uncut Skill Gem"
+    SetTextColor 255 255 255 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 170 158 130 255
+    SetFontSize 32
+    DisableDropSound
+
+# W1｜17–18级未切割精魂宝石
+Show
+    GemLevel >= 17
+    GemLevel <= 18
+    BaseType "Uncut Spirit Gem"
+    SetTextColor 255 255 255 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 170 158 130 255
+    SetFontSize 32
+    DisableDropSound
+
+# G2｜未切割辅助宝石
+Show
+    BaseType "Uncut Support Gem"
+    SetTextColor 88 211 79 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 170 158 130 255
+    SetFontSize 32
+    DisableDropSound
+
+# H｜低等级未切割技能/精魂宝石
+Hide
+    GemLevel <= 16
+    BaseType "Uncut Skill Gem" "Uncut Spirit Gem"
+    DisableDropSound
+
+# H｜其他普通成品宝石
+Hide
+    Class == "Skill Gems" "Support Gems"
+    DisableDropSound
+
+# ============================================================================
+# 04｜镶嵌物｜符文、灵魂核心与珠宝
+# ============================================================================
+
+# P4｜大师制作符文与奥杜尔高阶增幅器
+Show
+    Class == "Augment"
+    BaseType == "Masterwork Rune" "Passion of Aldur" "Breath of Aldur" "Ire of Aldur" "Betrayal of Aldur" "Aldur's Legacy" "Serle's Triumph" "Cadigan's Epiphany" "Astrid's Creativity" "Uhtred's Sidereus" "Kolr's Hunt" "Vorana's Carnage" "Thrud's Might" "Medved's Tending" "Katla's Gloom"
+    SetTextColor 163 53 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 190 145 225 255
+    SetFontSize 32
+    PlayEffect Purple
+    PlayAlertSoundPositional 2 150
+    DisableDropSoundIfAlertSound
+    MinimapIcon 0 Purple Diamond
+
+# B3｜完美符文
+Show
+    Class == "Augment"
+    BaseType == "Perfect Desert Rune" "Perfect Glacial Rune" "Perfect Storm Rune" "Perfect Iron Rune" "Perfect Body Rune" "Perfect Mind Rune" "Perfect Rebirth Rune" "Perfect Inspiration Rune" "Perfect Stone Rune" "Perfect Vision Rune" "Perfect Robust Rune" "Perfect Adept Rune" "Perfect Resolve Rune" "Perfect Ward Rune" "Perfect Charging Rune"
+    SetTextColor 51 153 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 190 145 225 255
+    SetFontSize 32
+    PlayEffect Blue Temp
+    DisableDropSound
+    MinimapIcon 1 Blue Diamond
+
+# B3｜远古/护卫/命名符文与稀有灵魂核心
+Show
+    Class == "Augment"
+    BaseType "Ancient Rune" "Warding Rune" "'s Rune" "'s Soul Core"
+    SetTextColor 51 153 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 190 145 225 255
+    SetFontSize 32
+    PlayEffect Blue Temp
+    DisableDropSound
+    MinimapIcon 1 Blue Diamond
+
+# G2｜高级符文
+Show
+    Class == "Augment"
+    BaseType "Greater "
+    SetTextColor 88 211 79 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 190 145 225 255
+    SetFontSize 32
+    DisableDropSound
+
+# G2｜其他灵魂核心
+Show
+    Class == "Augment"
+    BaseType "Soul Core"
+    SetTextColor 88 211 79 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 190 145 225 255
+    SetFontSize 32
+    DisableDropSound
+
+# H｜低阶符文
+Hide
+    Class == "Augment"
+    BaseType "Lesser "
+    DisableDropSound
+
+# W1｜普通符文
+Show
+    Class == "Augment"
+    BaseType "Rune"
+    SetTextColor 255 255 255 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 190 145 225 255
+    SetFontSize 32
+    DisableDropSound
+
+# B3｜限定来源雕像
+Show
+    Class == "Augment"
+    BaseType "Idol"
+    SetTextColor 51 153 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 190 145 225 255
+    SetFontSize 32
+    PlayEffect Blue Temp
+    DisableDropSound
+    MinimapIcon 1 Blue Diamond
+
+# P4｜失落时空珠宝
+Show
+    Class == "Jewels"
+    BaseType "Time-Lost"
+    SetTextColor 163 53 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 190 145 225 255
+    SetFontSize 32
+    PlayEffect Purple
+    PlayAlertSoundPositional 2 150
+    DisableDropSoundIfAlertSound
+    MinimapIcon 0 Purple Diamond
+
+# B3｜传奇珠宝
+Show
+    Rarity Unique
+    Class == "Jewels"
+    SetTextColor 51 153 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 190 145 225 255
+    SetFontSize 32
+    PlayEffect Blue Temp
+    DisableDropSound
+    MinimapIcon 1 Blue Diamond
+
+# G2｜高物等稀有珠宝
+Show
+    ItemLevel >= 82
+    Rarity Rare
+    Class == "Jewels"
+    SetTextColor 88 211 79 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 190 145 225 255
+    SetFontSize 32
+    DisableDropSound
+
+# W1｜其他稀有珠宝
+Show
+    Rarity Rare
+    Class == "Jewels"
+    SetTextColor 255 255 255 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 190 145 225 255
+    SetFontSize 32
+    DisableDropSound
+
+# H｜普通/魔法珠宝
+Hide
+    Rarity Normal Magic
+    Class == "Jewels"
+    DisableDropSound
+
+# W1｜普通圣物
+Show
+    BaseType "Relic"
+    SetTextColor 255 255 255 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 190 145 225 255
+    SetFontSize 32
+    DisableDropSound
+
+# X0｜其他未知增幅器
+Show
+    Class == "Augment"
+    SetTextColor 157 157 157 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 190 145 225 255
+    SetFontSize 32
+    DisableDropSound
+
+# ============================================================================
+# 05｜门票｜引路石、石板、钥匙与试炼
+# ============================================================================
+
+# P4｜15阶高品质或腐化引路石
+Show
+    WaystoneTier >= 15
+    Quality >= 15
+    Class == "Waystones"
+    SetTextColor 163 53 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 220 220 220 255
+    SetFontSize 32
+    PlayEffect Purple
+    PlayAlertSoundPositional 2 150
+    DisableDropSoundIfAlertSound
+    MinimapIcon 0 Purple Square
+
+# P4｜15阶腐化引路石
+Show
+    WaystoneTier >= 15
+    Corrupted True
+    Class == "Waystones"
+    SetTextColor 163 53 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 220 220 220 255
+    SetFontSize 32
+    PlayEffect Purple
+    PlayAlertSoundPositional 2 150
+    DisableDropSoundIfAlertSound
+    MinimapIcon 0 Purple Square
+
+# B3｜传奇引路石
+Show
+    Rarity Unique
+    Class == "Waystones"
+    SetTextColor 51 153 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 220 220 220 255
+    SetFontSize 32
+    PlayEffect Blue Temp
+    DisableDropSound
+    MinimapIcon 1 Blue Square
+
+# B3｜15阶及以上引路石
+Show
+    WaystoneTier >= 15
+    Class == "Waystones"
+    SetTextColor 51 153 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 220 220 220 255
+    SetFontSize 32
+    PlayEffect Blue Temp
+    DisableDropSound
+    MinimapIcon 1 Blue Square
+
+# B3｜14阶高品质引路石
+Show
+    WaystoneTier 14
+    Quality >= 15
+    Class == "Waystones"
+    SetTextColor 51 153 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 220 220 220 255
+    SetFontSize 32
+    PlayEffect Blue Temp
+    DisableDropSound
+    MinimapIcon 1 Blue Square
+
+# G2｜14阶引路石
+Show
+    WaystoneTier 14
+    Class == "Waystones"
+    SetTextColor 88 211 79 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 220 220 220 255
+    SetFontSize 32
+    DisableDropSound
+
+# W1｜12–13阶引路石
+Show
+    WaystoneTier >= 12
+    WaystoneTier <= 13
+    Class == "Waystones"
+    SetTextColor 255 255 255 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 220 220 220 255
+    SetFontSize 32
+    DisableDropSound
+
+# X0｜10–11阶引路石
+Show
+    WaystoneTier >= 10
+    WaystoneTier <= 11
+    Class == "Waystones"
+    SetTextColor 157 157 157 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 220 220 220 255
+    SetFontSize 32
+    DisableDropSound
+
+# H｜1–9阶引路石
+Hide
+    WaystoneTier <= 9
+    Class == "Waystones"
+    DisableDropSound
+
+# P4｜巅峰首领完整钥匙
+Show
+    Class == "Pinnacle Keys"
+    SetTextColor 163 53 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 220 220 220 255
+    SetFontSize 32
+    PlayEffect Purple
+    PlayAlertSoundPositional 2 150
+    DisableDropSoundIfAlertSound
+    MinimapIcon 0 Purple Square
+
+# P4｜宝库/珍宝库钥匙
+Show
+    Class == "Vault Keys"
+    SetTextColor 163 53 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 220 220 220 255
+    SetFontSize 32
+    PlayEffect Purple
+    PlayAlertSoundPositional 2 150
+    DisableDropSoundIfAlertSound
+    MinimapIcon 0 Purple Square
+
+# P4｜高阶首领与机制门票
+Show
+    BaseType == "The Triskelion Reforged" "Head of the King" "Call of the Shadows" "Breachlord Sac" "Raven's Reflection" "An Audience with the King" "Breachstone" "Cowardly Fate" "Deadly Fate" "Victorious Fate" "Simulacrum"
+    SetTextColor 163 53 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 220 220 220 255
+    SetFontSize 32
+    PlayEffect Purple
+    PlayAlertSoundPositional 2 150
+    DisableDropSoundIfAlertSound
+    MinimapIcon 0 Purple Square
+
+# B3｜宏大先祖秘藏
+Show
+    Class == "Expedition Logbook"
+    SetTextColor 51 153 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 220 220 220 255
+    SetFontSize 32
+    PlayEffect Blue Temp
+    DisableDropSound
+    MinimapIcon 1 Blue Square
+
+# B3｜首领钥匙组件
+Show
+    Class == "Map Fragments"
+    SetTextColor 51 153 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 220 220 220 255
+    SetFontSize 32
+    PlayEffect Blue Temp
+    DisableDropSound
+    MinimapIcon 1 Blue Square
+
+# R5｜传奇石板｜传奇石板统一红色最高优先级保护。
+Show
+    Rarity Unique
+    Class == "Tablet"
+    SetTextColor 255 32 32 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 220 220 220 255
+    SetFontSize 32
+    PlayEffect Red
+    CustomAlertSound "red.mp3"
+    DisableDropSoundIfAlertSound
+    MinimapIcon 0 Red Square
+
+# P4｜仪式石板｜仪式石板价值上限显著更高，统一紫色保护并检查词缀。
+Show
+    BaseType == "Ritual Tablet"
+    SetTextColor 163 53 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 220 220 220 255
+    SetFontSize 32
+    PlayEffect Purple
+    PlayAlertSoundPositional 2 150
+    DisableDropSoundIfAlertSound
+    MinimapIcon 0 Purple Square
+
+# B3｜其他可交易普通石板｜普通石板价值主要由词缀组合决定，统一蓝色并要求检查。
+Show
+    BaseType == "Abyss Tablet" "Temple Tablet" "Delirium Tablet" "Breach Tablet" "Overseer Tablet" "Irradiated Tablet" "Expedition Tablet"
+    SetTextColor 51 153 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 220 220 220 255
+    SetFontSize 32
+    PlayEffect Blue Temp
+    DisableDropSound
+    MinimapIcon 1 Blue Square
+
+# W1｜其他未知石板｜后续热修新增石板的安全兜底。
+Show
+    Class == "Tablet"
+    SetTextColor 255 255 255 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 220 220 220 255
+    SetFontSize 32
+    DisableDropSound
+
+# B3｜高阶丝克玛试炼币
+Show
+    ItemLevel >= 80
+    BaseType == "Djinn Barya"
+    SetTextColor 51 153 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 220 220 220 255
+    SetFontSize 32
+    PlayEffect Blue Temp
+    DisableDropSound
+    MinimapIcon 1 Blue Square
+
+# W1｜中阶丝克玛试炼币
+Show
+    ItemLevel >= 60
+    ItemLevel <= 79
+    BaseType == "Djinn Barya"
+    SetTextColor 255 255 255 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 220 220 220 255
+    SetFontSize 32
+    DisableDropSound
+
+# H｜低阶丝克玛试炼币
+Hide
+    ItemLevel <= 59
+    BaseType == "Djinn Barya"
+    DisableDropSound
+
+# B3｜高阶混沌试炼门票
+Show
+    ItemLevel >= 80
+    BaseType == "Inscribed Ultimatum"
+    SetTextColor 51 153 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 220 220 220 255
+    SetFontSize 32
+    PlayEffect Blue Temp
+    DisableDropSound
+    MinimapIcon 1 Blue Square
+
+# W1｜普通混沌试炼门票
+Show
+    BaseType == "Inscribed Ultimatum"
+    SetTextColor 255 255 255 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 220 220 220 255
+    SetFontSize 32
+    DisableDropSound
+
+# ============================================================================
+# 06｜使用消耗品
+# ============================================================================
+
+# P4｜启示型孕育赠礼
+Show
+    Class == "Wombgifts"
+    BaseType == "Revelatory Wombgift"
+    SetTextColor 163 53 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 220 220 220 255
+    SetFontSize 32
+    PlayEffect Purple
+    PlayAlertSoundPositional 2 150
+    DisableDropSoundIfAlertSound
+    MinimapIcon 0 Purple Raindrop
+
+# B3｜奢华/华丽型孕育赠礼
+Show
+    Class == "Wombgifts"
+    BaseType == "Lavish Wombgift" "Ornate Wombgift"
+    SetTextColor 51 153 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 220 220 220 255
+    SetFontSize 32
+    PlayEffect Blue Temp
+    DisableDropSound
+    MinimapIcon 1 Blue Raindrop
+
+# G2｜印玺/束带型孕育赠礼
+Show
+    Class == "Wombgifts"
+    BaseType == "Signet Wombgift" "Banded Wombgift"
+    SetTextColor 88 211 79 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 220 220 220 255
+    SetFontSize 32
+    DisableDropSound
+
+# W1｜其他孕育赠礼
+Show
+    Class == "Wombgifts"
+    SetTextColor 255 255 255 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 220 220 220 255
+    SetFontSize 32
+    DisableDropSound
+
+# W1｜孵化器
+Show
+    Class == "Incubators"
+    SetTextColor 255 255 255 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 220 220 220 255
+    SetFontSize 32
+    DisableDropSound
+
+# W1｜金币｜默认背景｜无边框｜75%字号｜保留客户端默认文字、背景与声音；仅移除边框，并把项目标准字号 32 缩小为 24。
+Show
+    BaseType == "Gold"
+    SetBorderColor 0 0 0 0
+    SetFontSize 24
+
+# ============================================================================
+# 07｜制作品｜核心通货
+# ============================================================================
+
+# R5｜Jackpot 核心通货
+Show
+    BaseType == "Mirror of Kalandra" "Hinekora's Lock"
+    SetTextColor 255 32 32 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 170 158 130 255
+    SetFontSize 32
+    PlayEffect Red
+    CustomAlertSound "red.mp3"
+    DisableDropSoundIfAlertSound
+    MinimapIcon 0 Red Star
+
+# P4｜紫色核心通货
+Show
+    BaseType == "Fracturing Orb" "Perfect Chaos Orb"
+    SetTextColor 163 53 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 170 158 130 255
+    SetFontSize 32
+    PlayEffect Purple
+    PlayAlertSoundPositional 2 150
+    DisableDropSoundIfAlertSound
+    MinimapIcon 0 Purple Star
+
+# B3｜蓝色核心通货
+Show
+    BaseType == "Perfect Exalted Orb" "Divine Orb" "Orb of Annulment"
+    SetTextColor 51 153 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 170 158 130 255
+    SetFontSize 32
+    PlayEffect Blue Temp
+    DisableDropSound
+
+# G2｜绿色核心通货
+Show
+    BaseType == "Greater Chaos Orb" "Perfect Regal Orb" "Perfect Orb of Augmentation" "Perfect Orb of Transmutation" "Perfect Jeweller's Orb" "Chaos Orb" "Orb of Chance" "Vaal Orb"
+    SetTextColor 88 211 79 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 170 158 130 255
+    SetFontSize 32
+    DisableDropSound
+
+# W1｜白色核心通货
+Show
+    BaseType == "Greater Exalted Orb" "Greater Regal Orb" "Greater Orb of Augmentation" "Greater Orb of Transmutation" "Greater Jeweller's Orb" "Orb of Alchemy" "Artificer's Orb" "Gemcutter's Prism"
+    SetTextColor 255 255 255 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 170 158 130 255
+    SetFontSize 32
+    DisableDropSound
+
+# W1｜灰色核心通货大堆叠
+Show
+    StackSize >= 5
+    BaseType == "Exalted Orb" "Regal Orb" "Lesser Jeweller's Orb" "Blacksmith's Whetstone" "Armourer's Scrap" "Arcanist's Etcher" "Glassblower's Bauble"
+    SetTextColor 255 255 255 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 170 158 130 255
+    SetFontSize 32
+    DisableDropSound
+
+# X0｜灰色核心通货
+Show
+    BaseType == "Exalted Orb" "Regal Orb" "Lesser Jeweller's Orb" "Blacksmith's Whetstone" "Armourer's Scrap" "Arcanist's Etcher" "Glassblower's Bauble"
+    SetTextColor 157 157 157 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 170 158 130 255
+    SetFontSize 32
+    DisableDropSound
+
+# X0｜低阶通货大堆叠
+Show
+    StackSize >= 10
+    BaseType == "Orb of Transmutation" "Orb of Augmentation" "Transmutation Shard" "Regal Shard" "Artificer's Shard" "Chance Shard"
+    SetTextColor 157 157 157 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 170 158 130 255
+    SetFontSize 32
+    DisableDropSound
+
+# H｜低阶通货与碎片
+Hide
+    BaseType == "Orb of Transmutation" "Orb of Augmentation" "Scroll of Wisdom" "Transmutation Shard" "Regal Shard" "Artificer's Shard" "Chance Shard" "Alchemy Shard"
+    DisableDropSound
+
+# ============================================================================
+# 08｜制作品｜精华、预兆、化石与催化剂
+# ============================================================================
+
+# P4｜顶级精华
+Show
+    BaseType == "Essence of Hysteria" "Essence of Horror"
+    SetTextColor 163 53 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 170 158 130 255
+    SetFontSize 32
+    PlayEffect Purple
+    PlayAlertSoundPositional 2 150
+    DisableDropSoundIfAlertSound
+    MinimapIcon 0 Purple Star
+
+# B3｜完美/特殊精华
+Show
+    BaseType "Perfect Essence" "Essence of the Breach" "Essence of Insanity" "Essence of Delirium" "Essence of the Abyss"
+    SetTextColor 51 153 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 170 158 130 255
+    SetFontSize 32
+    PlayEffect Blue Temp
+    DisableDropSound
+
+# G2｜高级精华
+Show
+    BaseType "Greater Essence"
+    SetTextColor 88 211 79 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 170 158 130 255
+    SetFontSize 32
+    DisableDropSound
+
+# H｜低级精华
+Hide
+    BaseType "Lesser Essence"
+    DisableDropSound
+
+# W1｜普通精华
+Show
+    BaseType "Essence"
+    SetTextColor 255 255 255 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 170 158 130 255
+    SetFontSize 32
+    DisableDropSound
+
+# P4｜传奇篇章与极稀有预兆
+Show
+    Class == "Omen"
+    BaseType == "Aldur's Saga" "Medved's Saga" "Vorana's Saga" "Uhtred's Saga" "Olroth's Saga" "Omen of Chance" "Omen of Whittling" "Omen of Corruption" "Omen of Sanctification"
+    SetTextColor 163 53 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 170 158 130 255
+    SetFontSize 32
+    PlayEffect Purple
+    PlayAlertSoundPositional 2 150
+    DisableDropSoundIfAlertSound
+    MinimapIcon 0 Purple Star
+
+# B3｜强力制作预兆
+Show
+    Class == "Omen"
+    BaseType == "Omen of Catalysing Exaltation" "Omen of Greater Exaltation" "Omen of Dextral Annulment" "Omen of Sinistral Annulment" "Omen of Dextral Crystallisation" "Omen of Sinistral Crystallisation" "Omen of Chaotic Effectiveness"
+    SetTextColor 51 153 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 170 158 130 255
+    SetFontSize 32
+    PlayEffect Blue Temp
+    DisableDropSound
+
+# G2｜其他预兆
+Show
+    Class == "Omen"
+    SetTextColor 88 211 79 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 170 158 130 255
+    SetFontSize 32
+    DisableDropSound
+
+# B3｜精制催化剂
+Show
+    BaseType == "Refined Flesh Catalyst" "Refined Neural Catalyst" "Refined Carapace Catalyst" "Refined Uul-Netol's Catalyst" "Refined Xoph's Catalyst" "Refined Tul's Catalyst" "Refined Esh's Catalyst" "Refined Chayula's Catalyst" "Refined Reaver Catalyst" "Refined Sibilant Catalyst" "Refined Skittering Catalyst" "Refined Adaptive Catalyst"
+    SetTextColor 51 153 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 170 158 130 255
+    SetFontSize 32
+    PlayEffect Blue Temp
+    DisableDropSound
+
+# W1｜其他催化剂
+Show
+    BaseType "Catalyst"
+    SetTextColor 255 255 255 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 170 158 130 255
+    SetFontSize 32
+    DisableDropSound
+
+# W1｜化石
+Show
+    BaseType "Fossil"
+    SetTextColor 255 255 255 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 170 158 130 255
+    SetFontSize 32
+    DisableDropSound
+
+# ============================================================================
+# 09｜制作品｜0.5 新材料
+# ============================================================================
+
+# P4｜最高阶液化情感
+Show
+    BaseType == "Ancient Potent Liquid Melancholy" "Ancient Potent Liquid Ferocity" "Ancient Potent Liquid Contempt"
+    SetTextColor 163 53 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 170 158 130 255
+    SetFontSize 32
+    PlayEffect Purple
+    PlayAlertSoundPositional 2 150
+    DisableDropSoundIfAlertSound
+    MinimapIcon 0 Purple Star
+
+# B3｜强效/远古浓缩液化情感
+Show
+    BaseType "Potent Liquid" "Ancient Concentrated Liquid"
+    SetTextColor 51 153 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 170 158 130 255
+    SetFontSize 32
+    PlayEffect Blue Temp
+    DisableDropSound
+
+# G2｜远古普通液化情感
+Show
+    BaseType "Ancient Liquid"
+    SetTextColor 88 211 79 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 170 158 130 255
+    SetFontSize 32
+    DisableDropSound
+
+# W1｜普通/稀释液化情感
+Show
+    BaseType "Liquid " "Diluted Liquid"
+    SetTextColor 255 255 255 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 170 158 130 255
+    SetFontSize 32
+    DisableDropSound
+
+# P4｜符文之父/符文缚者/超凡合金
+Show
+    BaseType == "The Runefather's Alloy" "The Runebinder's Alloy" "Transcendent Alloy"
+    SetTextColor 163 53 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 170 158 130 255
+    SetFontSize 32
+    PlayEffect Purple
+    PlayAlertSoundPositional 2 150
+    DisableDropSoundIfAlertSound
+    MinimapIcon 0 Purple Star
+
+# B3｜天界/君主合金
+Show
+    BaseType == "Celestial Alloy" "Sovereign Alloy"
+    SetTextColor 51 153 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 170 158 130 255
+    SetFontSize 32
+    PlayEffect Blue Temp
+    DisableDropSound
+
+# G2｜中阶合金
+Show
+    BaseType == "Prismatic Alloy" "Mystic Alloy" "Adaptive Alloy" "Protective Alloy" "Cyclonic Alloy"
+    SetTextColor 88 211 79 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 170 158 130 255
+    SetFontSize 32
+    DisableDropSound
+
+# W1｜基础合金
+Show
+    BaseType == "Runic Alloy" "Swift Alloy" "Expansive Alloy"
+    SetTextColor 255 255 255 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 170 158 130 255
+    SetFontSize 32
+    DisableDropSound
+
+# P4｜真实星光矿石
+Show
+    BaseType == "Veridical Starlit Ore"
+    SetTextColor 163 53 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 170 158 130 255
+    SetFontSize 32
+    PlayEffect Purple
+    PlayAlertSoundPositional 2 150
+    DisableDropSoundIfAlertSound
+    MinimapIcon 0 Purple Star
+
+# B3｜崇敬/尊贵星光矿石
+Show
+    BaseType == "Revered Starlit Ore" "Venerable Starlit Ore"
+    SetTextColor 51 153 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 170 158 130 255
+    SetFontSize 32
+    PlayEffect Blue Temp
+    DisableDropSound
+
+# G2｜防护/普通星光矿石
+Show
+    BaseType == "Warding Starlit Ore" "Starlit Ore"
+    SetTextColor 88 211 79 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 170 158 130 255
+    SetFontSize 32
+    DisableDropSound
+
+# B3｜卓越维里西姆
+Show
+    BaseType == "Exceptional Verisium"
+    SetTextColor 51 153 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 170 158 130 255
+    SetFontSize 32
+    PlayEffect Blue Temp
+    DisableDropSound
+
+# G2｜维里西姆
+Show
+    BaseType == "Verisium"
+    SetTextColor 88 211 79 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 170 158 130 255
+    SetFontSize 32
+    DisableDropSound
+
+# B3｜瓦尔注能装置
+Show
+    BaseType == "Vaal Armourer's Infuser" "Vaal Blacksmith's Infuser" "Vaal Arcanist's Infuser" "Vaal Catalysing Infuser"
+    SetTextColor 51 153 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 170 158 130 255
+    SetFontSize 32
+    PlayEffect Blue Temp
+    DisableDropSound
+
+# B3｜17–20级奇术熔剂
+Show
+    BaseType == "Thaumaturgic Flux (Level 17)" "Thaumaturgic Flux (Level 18)" "Thaumaturgic Flux (Level 19)" "Thaumaturgic Flux (Level 20)"
+    SetTextColor 51 153 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 170 158 130 255
+    SetFontSize 32
+    PlayEffect Blue Temp
+    DisableDropSound
+
+# G2｜13–16级奇术熔剂
+Show
+    BaseType == "Thaumaturgic Flux (Level 13)" "Thaumaturgic Flux (Level 14)" "Thaumaturgic Flux (Level 15)" "Thaumaturgic Flux (Level 16)"
+    SetTextColor 88 211 79 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 170 158 130 255
+    SetFontSize 32
+    DisableDropSound
+
+# W1｜5–12级奇术熔剂
+Show
+    BaseType == "Thaumaturgic Flux (Level 5)" "Thaumaturgic Flux (Level 6)" "Thaumaturgic Flux (Level 7)" "Thaumaturgic Flux (Level 8)" "Thaumaturgic Flux (Level 9)" "Thaumaturgic Flux (Level 10)" "Thaumaturgic Flux (Level 11)" "Thaumaturgic Flux (Level 12)"
+    SetTextColor 255 255 255 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 170 158 130 255
+    SetFontSize 32
+    DisableDropSound
+
+# G2｜元素熔剂
+Show
+    BaseType == "Blazing Flux" "Chilling Flux" "Crackling Flux" "Void Flux"
+    SetTextColor 88 211 79 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 170 158 130 255
+    SetFontSize 32
+    DisableDropSound
+
+# ============================================================================
+# 10｜堆叠碎片与剩余已知类别
+# ============================================================================
+
+# B3｜大型碎片堆叠
+Show
+    StackSize >= 20
+    BaseType == "Breach Splinter" "Petition Splinter" "Runic Splinter" "Simulacrum Splinter"
+    SetTextColor 51 153 238 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 170 158 130 255
+    SetFontSize 32
+    PlayEffect Blue Temp
+    DisableDropSound
+
+# G2｜中型碎片堆叠
+Show
+    StackSize >= 8
+    BaseType == "Breach Splinter" "Petition Splinter" "Runic Splinter" "Simulacrum Splinter"
+    SetTextColor 88 211 79 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 170 158 130 255
+    SetFontSize 32
+    DisableDropSound
+
+# W1｜小型碎片堆叠
+Show
+    BaseType == "Breach Splinter" "Petition Splinter" "Runic Splinter" "Simulacrum Splinter"
+    SetTextColor 255 255 255 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 170 158 130 255
+    SetFontSize 32
+    DisableDropSound
+
+# X0｜其他已知可堆叠通货｜0.5 后续热修安全缓冲，避免未知通货被隐藏。
+Show
+    Class == "Stackable Currency"
+    SetTextColor 157 157 157 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 170 158 130 255
+    SetFontSize 32
+    DisableDropSound
+
+# ============================================================================
+# 99｜兜底
+# ============================================================================
+
+# X0｜其他未知物品｜仅已知低价值类别被明确隐藏；未知物品灰色保底显示。
+Show
+    SetTextColor 157 157 157 255
+    SetBackgroundColor 0 0 0 220
+    SetBorderColor 0 0 0 0
+    SetFontSize 32
+    DisableDropSound

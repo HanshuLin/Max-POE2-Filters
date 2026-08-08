@@ -1,22 +1,25 @@
-# POE2 Endgame Value Filter V1.31 — Change Log
+# Max POE2 Filters v1.4 — Change Log
 
-发布日期：2026-08-06
+发布日期：2026-08-08
 
-基线版本：V1.3
+基线版本：v1.31
 
-## 新引入的想法
+## 新增 Rarity Filter
 
-- 特殊 Boss 门票与终局钥匙不再按市场价格分级，统一固定为 B3 蓝色。
-- 所有特殊 Boss 门票与终局钥匙统一使用柔化蓝色边框。
-- `Pinnacle Keys` 使用类别规则，后续新增的同类别钥匙会自动获得 B3 样式。
-- 归入 `Map Fragments` 的 Boss 门票使用明确的 BaseType 名单；普通进度碎片不受影响。
+- 新增 `rarity-filter/endgame_rarity_filter_v1.4.filter`，作为 Value Filter 之外的第二种过滤风格。
+- Rarity Filter 依据物品稀有度、底材档位、物品等级和 UIT 进行评级；UIT 只会提升评级，不会降低评级。
+- 新增 `rarity-filter/endgame_rarity_filter_v1.4_review.html`，可离线查看首饰底材分级、规则逻辑和视觉结果。
+- Rarity Filter 已统一升级为 v1.4，并纳入同一个 `Max-POE2-Filters` 仓库和 Release。
 
-## Filter 规则变化
+## Value Filter
 
-| 规则 | 上版本品级 | 当前版本品级 |
-| --- | --- | --- |
-| `Class == "Pinnacle Keys"` | W1 安全回退或市场评级 | **B3** |
-| 已知 `Map Fragments` Boss 门票 BaseType | H / G2 / B3 / P4 | **B3** |
-| 特殊 Boss 门票与终局钥匙边框 | 柔化白色 | **柔化蓝色** |
-| `An Audience with the King`（谒王之约）低价值隐藏 | H | 删除 |
-| `Call of the Shadows`（暗影呼唤）低价值隐藏 | H | 删除 |
+- 保留现有 `endgame-filter/endgame_filter.filter` 及 `endgame-filter/list.html`。
+- Value Filter 的规则沿用 v1.31，本次发布不修改其过滤逻辑。
+
+## 下载内容
+
+v1.4 Release ZIP 同时包含：
+
+- `endgame-filter/`：按市场价值分级的 Value Filter。
+- `rarity-filter/`：按稀有度、底材和物品等级分级的 Rarity Filter。
+- `README.md` 与 `CHANGELOG.md`。
